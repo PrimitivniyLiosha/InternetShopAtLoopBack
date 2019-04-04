@@ -1,0 +1,49 @@
+{
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 8
+  },
+  "env": {
+    "node": true
+},
+  "extends": "loopback",
+  "rules": {
+    "quotes":["warn", "single", { "allowTemplateLiterals": true }],
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "max-len": ["warn", { "code": 90 }],
+    "no-eval": "error",
+    "no-magic-numbers": ["error", { "ignore": [1,0], "ignoreArrayIndexes": true }],
+    "no-multi-spaces": ["error"],
+    "no-const-assign": "error",
+    "comma-dangle": "off",
+    "comma-spacing": ["warn", {"before": false, "after": true}],
+    "computed-property-spacing": ["warn", "never"],
+    "space-before-function-paren": ["error", "always"],
+    "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
+    "object-curly-spacing":["error", "always"],
+    "keyword-spacing":["error", { "before": true, "after": true }],
+    "no-mixed-spaces-and-tabs":"error",
+    "no-trailing-spaces":["error", {"skipBlankLines": true}],
+    "arrow-spacing":["error", { "before": true, "after": true }],
+    "indent": ["error", 2, {
+      "SwitchCase": 1,
+      "VariableDeclarator": 1,
+      "outerIIFEBody": 1,
+      "FunctionDeclaration": {
+        "parameters": 1,
+        "body": 1
+      },
+      "FunctionExpression": {
+        "parameters": 1,
+        "body": 1
+      },
+      "CallExpression": {
+        "arguments": 1
+      },
+      "ArrayExpression": 1,
+      "ObjectExpression": 1
+    }],
+    "eol-last":"off"
+
+  }
+}
