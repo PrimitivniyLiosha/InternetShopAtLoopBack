@@ -14,26 +14,26 @@
     ]
   },
   "User": {
-    "dataSource": "mongod",
+    "dataSource": "db",
     "public": false
   },
   "AccessToken": {
-    "dataSource": "mongod",
+    "dataSource": "db",
     "public": false
   },
   "ACL": {
-    "dataSource": "mongod",
+    "dataSource": "db",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "mongod",
+    "dataSource": "db",
     "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "Role": {
-    "dataSource": "mongod",
+    "dataSource": "db",
     "public": false
   }
 }

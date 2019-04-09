@@ -1,15 +1,11 @@
 {
   "db": {
-    "name": "db",
-    "connector": "memory"
-  },
-  "mongod": {
     "host": "localhost",
     "port": 27017,
-    "url": "mongodb://localhost:27017/EnternetShop",
-    "database": "EnternetShop",
+    "url": "mongodb://localhost:27017/InternetShop",
+    "database": "InternetShop",
     "password": "",
-    "name": "mongod",
+    "name": "db",
     "user": "",
     "connector": "mongodb"
   }
