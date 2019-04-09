@@ -1,7 +1,7 @@
 {
-  "name": "Category",
-  "description": "Product category",
-  "plural": "Categories",
+  "name": "Product",
+  "description": "Product",
+  "plural": "Products",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -11,13 +11,17 @@
     "name": {
       "type": "string",
       "required": true
+    },
+    "price": {
+      "type": "number",
+      "required": true
     }
   },
   "validations": [],
   "relations": {
-    "products": {
-      "type": "hasMany",
-      "model": "Product"
+    "category": {
+      "type": "belongsTo",
+      "model": "Category"
     }
   },
   "acls": [],
