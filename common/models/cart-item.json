@@ -1,6 +1,6 @@
 {
   "name": "CartItem",
-  "description": "Cart item",
+  "description": "",
   "plural": "CartItems",
   "base": "PersistedModel",
   "idInjection": true,

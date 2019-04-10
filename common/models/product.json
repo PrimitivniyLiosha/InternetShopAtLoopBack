@@ -1,6 +1,6 @@
 {
   "name": "Product",
-  "description": "Product",
+  "description": "",
   "plural": "Products",
   "base": "PersistedModel",
   "idInjection": true,
