@@ -1,0 +1,16 @@
+{
+  "name": "user",
+  "description": "",
+  "plural": "users",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "hidden": ["password", "verificationToken","realm", "emailVerified"],
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
