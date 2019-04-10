@@ -43,5 +43,9 @@
   "Product": {
     "dataSource": "db",
     "public": true
+  },
+  "CartItem": {
+    "dataSource": "db",
+    "public": true
   }
 }
