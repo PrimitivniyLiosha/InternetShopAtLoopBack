@@ -1,0 +1,30 @@
+{
+    "name": "Cart",
+    "description": "",
+    "plural": "Carts",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "properties": {
+      "totalSum": {
+        "type": "number",
+        "required": false,
+        "default": 0
+      }
+    },
+    "validations": [],
+    "relations": {
+      "сustomer": {
+        "type": "belongsTo",
+        "model": "user" 
+      },
+      "cartItems": { 
+        "type": "hasMany",
+        "model": "CartItem"
+      }
+    },
+    "acls": [],
+    "methods": {}
+}
