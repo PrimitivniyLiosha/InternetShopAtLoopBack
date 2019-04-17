@@ -10,7 +10,12 @@
   "hidden": ["password", "verificationToken","realm", "emailVerified"],
   "properties": {},
   "validations": [],
-  "relations": {},
+  "relations": {
+    "cart": {
+      "type": "hasOne",
+      "model": "Cart" 
+    }
+  },
   "acls": [],
   "methods": {}
 }
