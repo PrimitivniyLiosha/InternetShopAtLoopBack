@@ -1,6 +1,6 @@
 module.exports = (Cartitem) => {
   Cartitem.observe('before save', async (ctx) => {
-    const product = await Cartitem.app.models.Product.findById(ctx.instance.productId);
+    const product = await app.models.Product.findById(ctx.instance.productId);
     if (!product.isAvailable) {
       const error = new Error();
       error.status = 412;
