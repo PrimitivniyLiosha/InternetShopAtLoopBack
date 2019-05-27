@@ -16,10 +16,6 @@
     },
     "validations": [],
     "relations": {
-      "сustomer": {
-        "type": "belongsTo",
-        "model": "user" 
-      },
       "cartItems": { 
         "type": "hasMany",
         "model": "CartItem"

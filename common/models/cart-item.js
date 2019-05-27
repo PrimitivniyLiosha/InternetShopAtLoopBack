@@ -18,26 +18,36 @@ module.exports = (CartItem) => {
   });
 
   CartItem.observe('before save', async (ctx) => {
-    if (ctx.currentInstance.quantity >= 1) {
-      const product = await app.models.Product.findById(ctx.currentInstance.productId);
-      ctx.currentInstance.totalSum = product.price * ctx.currentInstance.quantity;
+    if (ctx.instance && ctx.instance.quantity >= 1) {
+      const product = await app.models.Product.findById(ctx.instance.productId);
+      ctx.instance.totalSum = product.price * ctx.instance.quantity;
 
       if (!product.isAvailable) {
         throw new Error('Product is out of stock.', preconditionFailed);
       }
-    } else if (ctx.currentInstance.quantity < 1) {
+
+      const cart = await app.models.Cart.findById(ctx.instance.cartId);
+      cart.totalSum += ctx.instance.totalSum;
+      await cart.save();
+    } else if (ctx.instance && ctx.instance.quantity < 1) {
       throw new Error('Quantity should be more than zero.', preconditionFailed);
     }
-
-    if (ctx.data && ctx.data.quantity >= 1) {
-      const product = await app.models.Product.findById(ctx.data.productId);
+    
+    if (ctx.currentInstance && ctx.currentInstance.quantity >= 1) {
+      const product = await app.models.Product.findById(ctx.currentInstance.productId);
       ctx.data.totalSum = product.price * ctx.data.quantity;
-
+      
       if (!product.isAvailable) {
         throw new Error('Product is out of stock.', preconditionFailed);
       }
-    } else if (ctx.data && ctx.data.quantity < 1) {
-      throw new Error('Quantity should be more than zero.', preconditionFailed);
+      if (ctx.data.quantity < 1) {
+        throw new Error('Quantity should be more than zero.', preconditionFailed);
+      }
+
+      const cart = await app.models.Cart.findById(ctx.currentInstance.cartId);
+      cart.totalSum -= ctx.currentInstance.totalSum;
+      cart.totalSum += product.price * ctx.data.quantity;
+      await cart.save();
     }
   });
 };
