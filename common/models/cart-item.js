@@ -50,4 +50,24 @@ module.exports = (CartItem) => {
       await cart.save();
     }
   });
+
+  CartItem.delById = async (CartItemId) => {
+    const Cart = app.models.Cart;
+    const cartItem = await CartItem.findById(CartItemId);
+
+    const cart = await Cart.findById(cartItem.cartId);
+    cart.totalSum -= cartItem.totalSum;
+
+    await CartItem.destroyById(CartItemId);
+    await cart.save();
+    
+    return 'cartItem has been deleted';
+  };
+
+  CartItem.remoteMethod('delById', {
+    description: 'delete cartItem',
+    accepts: { arg: 'CartItemId', type: 'string' },
+    returns: { arg: 'message', type: 'string' },
+    http: { verb: 'delete' }
+  });
 };
