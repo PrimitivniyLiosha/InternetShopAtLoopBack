@@ -60,7 +60,7 @@ module.exports = (CartItem) => {
 
     await CartItem.destroyById(CartItemId);
     await cart.save();
-    
+
     return 'cartItem has been deleted';
   };
 
@@ -69,5 +69,40 @@ module.exports = (CartItem) => {
     accepts: { arg: 'CartItemId', type: 'string' },
     returns: { arg: 'message', type: 'string' },
     http: { verb: 'delete' }
+  });
+
+  CartItem.addcartItem = async (quantity, productId, cartid) => {
+    const Cart = await app.models.Cart.findById(cartid);
+    const product = await app.models.Product.findById(productId);
+    const cartItem = await CartItem.findOne({ where: { cartId: cartid, productId: productId } });
+
+    if (cartItem) {
+      Cart.totalSum -= cartItem.totalSum;
+      cartItem.quantity += quantity;
+      CartItem.totalSum = product.price * cartItem.quantity;
+      Cart.totalSum += CartItem.totalSum;
+      await cartItem.save();
+      await Cart.save();
+    
+      return 'cartItem has been added';
+    } else {
+      const totalSum = product.price * quantity;
+      await CartItem.create({
+        quantity: quantity,
+        totalSum: totalSum,
+        productId: productId,
+        cartId: cartid
+      });
+      return 'cartItem has been created';
+    }
+  };
+
+  CartItem.remoteMethod('addcartItem', {
+    description: 'add cartItem',
+    accepts: [{ arg: 'quantity', type: 'Number', },
+              { arg: 'productId', type: 'string' },
+              { arg: 'cartid', type: 'string' }],
+    returns: { arg: 'message', type: 'string' },
+    http: { verb: 'post' }
   });
 };
