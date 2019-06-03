@@ -76,6 +76,10 @@ module.exports = (CartItem) => {
     const product = await app.models.Product.findById(productId);
     const cartItem = await CartItem.findOne({ where: { cartId: cartid, productId: productId } });
 
+    if (quantity < 1) {
+      throw new Error('Quantity should be more than zero.', preconditionFailed);
+    }
+
     if (cartItem) {
       Cart.totalSum -= cartItem.totalSum;
       cartItem.quantity += quantity;
