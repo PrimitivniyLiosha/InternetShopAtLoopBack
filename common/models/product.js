@@ -14,7 +14,7 @@ module.exports = (Product) => {
   
   Product.observe('before save', async (ctx) => {
     if (ctx.data && ctx.data.price < 1) {
-      throw new Error('Quantity should be more than zero.', preconditionFailed);
+      throw new Error('Price should be more than zero.', preconditionFailed);
     }
   });
 
