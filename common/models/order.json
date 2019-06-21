@@ -1,32 +1,28 @@
 {
-  "name": "CartItem",
+  "name": "Order",
   "description": "",
-  "plural": "CartItems",
+  "plural": "Orders",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "quantity": {
-      "type": "number",
-      "required": true
-    },
     "totalSum": {
       "type": "number",
-      "required": false
-    },
-    "orderId": {
-      "type": "String",
       "required": false,
-      "default": ""
+      "default": 0
     }
   },
   "validations": [],
   "relations": {
-    "product": {
+    "cartItems": {
+      "type": "hasMany",
+      "model": "CartItem"
+    },
+    "user": {
       "type": "belongsTo",
-      "model": "Product"
+      "model": "user"
     }
   },
   "acls": [],
