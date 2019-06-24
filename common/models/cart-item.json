@@ -15,11 +15,6 @@
     "totalSum": {
       "type": "number",
       "required": false
-    },
-    "orderId": {
-      "type": "String",
-      "required": false,
-      "default": ""
     }
   },
   "validations": [],
@@ -27,6 +22,10 @@
     "product": {
       "type": "belongsTo",
       "model": "Product"
+    },
+    "cart": { 
+      "type": "belongsTo",
+      "model": "Cart"
     }
   },
   "acls": [],

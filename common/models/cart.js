@@ -1,13 +1,10 @@
 module.exports = (Cart) => {
   Cart.deleteCartItems = async (cartid) => {
     const Cart = await app.models.Cart;
-    const cartItem = await app.models.CartItem.find({ where: { cartId: cartid } });
     const cart = await Cart.findById(cartid);
 
-    for (let item of cartItem) {
-      cart.totalSum -= item.totalSum;
-      await cart.save();
-    }
+    cart.totalSum = 0;
+    await cart.save();
 
     await app.models.CartItem.destroyAll({ cartId: cartid });
     return 'cartItems has been deleted';

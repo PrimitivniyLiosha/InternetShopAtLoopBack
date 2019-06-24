@@ -8,5 +8,24 @@
     "name": "db",
     "user": "",
     "connector": "mongodb"
+  },
+  "emailDs": {
+    "name": "emailDs",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "smtp.gmail.com",
+        "secure": true,
+        "port": 465,
+        "tls": {
+          "rejectUnauthorized": false
+        },
+        "auth": {
+          "user": "ktulhu2050@gmail.com",
+          "pass": "25Frolik1996ua"
+        }
+      }
+    ]
   }
 }

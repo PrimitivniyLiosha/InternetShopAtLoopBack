@@ -55,5 +55,12 @@
   "Cart": {
     "dataSource": "db",
     "public": true
+  },
+  "Order": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Email": {
+    "dataSource": "emailDs"
   }
 }

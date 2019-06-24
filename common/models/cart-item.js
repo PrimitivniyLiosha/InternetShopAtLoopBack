@@ -21,18 +21,7 @@ module.exports = (CartItem) => {
     if (ctx.instance && ctx.instance.quantity >= 1) {
       const product = await app.models.Product.findById(ctx.instance.productId);
       ctx.instance.totalSum = product.price * ctx.instance.quantity;
-
-      if (!product.isAvailable) {
-        throw new Error('Product is out of stock.', preconditionFailed);
-      }
-
-      const cart = await app.models.Cart.findById(ctx.instance.cartId);
-      cart.totalSum += ctx.instance.totalSum;
-      await cart.save();
-    } else if (ctx.instance && ctx.instance.quantity < 1) {
-      throw new Error('Quantity should be more than zero.', preconditionFailed);
     }
-    
     if (ctx.currentInstance && ctx.currentInstance.quantity >= 1) {
       const product = await app.models.Product.findById(ctx.currentInstance.productId);
       ctx.data.totalSum = product.price * ctx.data.quantity;
@@ -40,6 +29,7 @@ module.exports = (CartItem) => {
       if (!product.isAvailable) {
         throw new Error('Product is out of stock.', preconditionFailed);
       }
+
       if (ctx.data.quantity < 1) {
         throw new Error('Quantity should be more than zero.', preconditionFailed);
       }
@@ -80,6 +70,10 @@ module.exports = (CartItem) => {
       throw new Error('Quantity should be more than zero.', preconditionFailed);
     }
 
+    if (!product.isAvailable) {
+      throw new Error('Product is out of stock.', preconditionFailed);
+    }
+
     if (cartItem) {
       Cart.totalSum -= cartItem.totalSum;
       cartItem.quantity += quantity;
@@ -91,12 +85,15 @@ module.exports = (CartItem) => {
       return 'cartItem has been added';
     } else {
       const totalSum = product.price * quantity;
-      await CartItem.create({
+      const cartitem = await CartItem.create({
         quantity: quantity,
         totalSum: totalSum,
         productId: productId,
         cartId: cartid
       });
+      Cart.totalSum += cartitem.totalSum;
+      await Cart.save();
+
       return 'cartItem has been created';
     }
   };

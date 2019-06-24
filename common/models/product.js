@@ -21,16 +21,16 @@ module.exports = (Product) => {
   Product.observe('after save', async (ctx) => {
     const cartItem = await app.models.CartItem.find({ where: { productId: ctx.instance.id } });
     if (cartItem) {
-      for (let i = 0; i < cartItem.length; i++) {
-        const value = cartItem[i];
-        const cart = await app.models.Cart.findById(value.cartId);
-          
-        cart.totalSum -= value.totalSum;
-        value.totalSum = value.quantity * ctx.instance.price;
-        cart.totalSum += value.totalSum;
-  
-        await value.save();
-        await cart.save();
+      for (let item of cartItem) {
+        if (item.cartId !== null) {
+          const cart = await app.models.Cart.findById(item.cartId);
+          cart.totalSum -= item.totalSum;
+          item.totalSum = item.quantity * ctx.instance.price;
+          cart.totalSum += item.totalSum;
+      
+          await item.save();
+          await cart.save();
+        }
       }
     }
   });
