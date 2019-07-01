@@ -2,7 +2,7 @@
   "name": "Order",
   "description": "",
   "plural": "Orders",
-  "base": "PersistedModel",
+  "base": "CurrencyConversion",
   "idInjection": true,
   "options": {
     "validateUpsert": true

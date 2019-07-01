@@ -2,7 +2,7 @@
   "name": "CartItem",
   "description": "",
   "plural": "CartItems",
-  "base": "PersistedModel",
+  "base": "CurrencyConversion",
   "idInjection": true,
   "options": {
     "validateUpsert": true

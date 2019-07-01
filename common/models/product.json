@@ -2,7 +2,7 @@
   "name": "Product",
   "description": "",
   "plural": "Products",
-  "base": "PersistedModel",
+  "base": "CurrencyConversion",
   "idInjection": true,
   "options": {
     "validateUpsert": true

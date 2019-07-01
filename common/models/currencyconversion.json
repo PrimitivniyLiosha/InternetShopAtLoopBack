@@ -1,0 +1,15 @@
+{
+    "name": "CurrencyConversion",
+    "description": "",
+    "plural": "CurrencyConversions",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "properties": {},
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+  }
